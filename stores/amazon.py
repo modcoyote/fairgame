@@ -672,6 +672,7 @@ class Amazon:
                 pass
 
             if test and (test.text in amazon_config["NO_SELLERS"]):
+                self.log_asin_status(asin, '')
                 return False
             if time.time() > timeout:
                 log.info(f"failed to load page for {asin}, going to next ASIN")
@@ -734,6 +735,10 @@ class Amazon:
                     return False
 
         in_stock = False
+
+        lowest_price = str(parse_price(prices[0].text).amount)
+        self.log_asin_status(asin, lowest_price)
+
         for shipping_price in shipping_prices:
             log.debug(f"\tShipping Price: {shipping_price}")
 
@@ -1114,6 +1119,13 @@ class Amazon:
                     )
                     self.driver.refresh()
                     time.sleep(3)
+
+    def log_asin_status(self, asin, price):
+        if self.price_logging:
+            if not price:
+                log.info(asin + " - Out of Stock")
+            else:
+                log.info(asin + " - Lowest Price: $" + price)
 
     # returns negative number if cart element does not exist, returns number if cart exists
     def get_cart_count(self):
