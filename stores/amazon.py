@@ -683,13 +683,13 @@ class Amazon:
         timeout = self.get_timeout()
         flyout_mode = False
         while True:
-            prices = self.driver.find_elements_by_xpath(
-                '//*[@class="a-size-large a-color-price olpOfferPrice a-text-bold"]'
+            prices = self.driver.find_elements_by_id(
+                'price_inside_buybox'
             )
             if not prices:
                 # Try the flyout x-paths
-                prices = self.driver.find_elements_by_xpath(
-                    "//div[@id='aod-pinned-offer' or @id='aod-offer']//div[contains(@id, 'aod-price')]//span[@class='a-price']//span[@class='a-offscreen']"
+                prices = self.driver.find_elements_by_class_name(
+                    "a-price-whole"
                 )
                 if prices:
                     flyout_mode = True
@@ -737,10 +737,8 @@ class Amazon:
                     return False
 
         in_stock = False
-
         lowest_price = str(parse_price(prices[0].text).amount)
         self.log_asin_status(asin, lowest_price)
-
         for shipping_price in shipping_prices:
             log.debug(f"\tShipping Price: {shipping_price}")
 
