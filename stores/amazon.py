@@ -104,6 +104,7 @@ class Amazon:
         disable_presence=False,
         slow_mode=False,
         no_image=False,
+        price_logging=False,
         encryption_pass=None,
         log_stock_check=False,
         shipping_bypass=False,
@@ -133,6 +134,7 @@ class Amazon:
         self.setup_driver = True
         self.headless = headless
         self.no_image = no_image
+        self.price_logging = price_logging
         self.log_stock_check = log_stock_check
         self.shipping_bypass = shipping_bypass
         self.unknown_title_notification_sent = False

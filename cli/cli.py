@@ -196,6 +196,12 @@ def main():
     default=False,
     help="Directly hit the offers page.  Preferred, but deprecated by Amazon.",
 )
+@click.option(
+    "--price-logging",
+    type=str,
+    is_flag=True,
+    help="Logs the lowest price of each ASIN as program runs",
+)
 @notify_on_crash
 def amazon(
     no_image,
@@ -211,6 +217,7 @@ def amazon(
     disable_sound,
     slow_mode,
     p,
+    price_logging,
     log_stock_check,
     shipping_bypass,
     clean_profile,
@@ -244,6 +251,7 @@ def amazon(
         disable_presence=disable_presence,
         slow_mode=slow_mode,
         no_image=no_image,
+        price_logging=price_logging,
         encryption_pass=p,
         log_stock_check=log_stock_check,
         shipping_bypass=shipping_bypass,
