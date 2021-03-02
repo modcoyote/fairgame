@@ -1129,7 +1129,7 @@ class Amazon:
             if not price:
                 log.info(asin + " - Out of Stock")
             else:
-                log.info(asin + " - Lowest Price: $" + price)
+                log.info(asin + " - Lowest Price: " + price)
 
     # returns negative number if cart element does not exist, returns number if cart exists
     def get_cart_count(self):
