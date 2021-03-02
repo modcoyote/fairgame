@@ -793,8 +793,10 @@ class Amazon:
                 (ship_float + price_float) >= reserve_min
                 or math.isclose((price_float + ship_float), reserve_min, abs_tol=0.01)
             ):
-                log.info("Item found at price " + price_float)
-                log.info("Item shipping cost " + ship_float)
+                log.info("Item found at price ")
+                log.info(price_float)
+                log.info("Item shipping cost ")
+                log.info(ship_float)
                 log.info("Item in stock and in reserve range!")
                 log.info("Adding to cart")
                 # Get the offering ID
